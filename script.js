@@ -22,7 +22,6 @@ buttonClick.forEach((button, i) => {
 const headerImage = document.querySelector('.mainHeader');
 const mainContainer = document.querySelector('main');
 const nav = document.querySelector('nav');
-let flag = true;
 
 window.addEventListener('scroll', () => {
     if (scrollY < mainContainer.offsetTop - nav.offsetHeight) {

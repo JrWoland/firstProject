@@ -69,10 +69,11 @@ nav {
     font-size: 1.5em;
     text-align: left;
     transition: background-color 1.2s;
+    z-index: 1;
 }
 
 nav.active {
-    background-color: #fdfdfd;
+    background-color: #fdfdfdea;
 }
 
 nav div {
@@ -114,10 +115,14 @@ section {
     overflow: hidden;
 }
 
+/* section:first-child {
+    background-color: rgb(228, 164, 164);
+} */
+
 figure {
     margin: auto;
     width: 95%;
-    font-size: 16px;
+    font-size: 13px;
     line-height: 10px;
 
 }
@@ -126,6 +131,7 @@ figure div p {
     margin: 0;
     padding: 50px 0;
     line-height: 2em;
+    text-align: justify;
 
 }
 
@@ -150,6 +156,7 @@ figcaption {
     padding: 10px 10px;
     text-align: center;
     overflow: hidden;
+    z-index: 0;
 }
 
 figcaption:hover {
@@ -175,8 +182,19 @@ figcaption:hover::after {
 }
 
 footer {
-    flex-basis: 85vh;
     background-color: rgb(42, 42, 52);
     color: rgb(169, 165, 165);
 
+}
+
+@media (min-width: 600px) {
+    main {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    section {
+        width: 48vw;
+    }
 }
