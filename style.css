@@ -5,12 +5,13 @@
     --colorAdobeRight: #BDE8C5;
     --colorAdobeEnd: #D5FFCF;
     --colorAdobeFont: rgb(10, 129, 142);
+    --transitionTime: .5s;
 
 }
 
 body {
     display: flex;
-    color: darkgoldenrod;
+    color: rgb(150, 111, 12);
     flex-direction: column;
     margin: 0;
     padding: 0;
@@ -68,12 +69,13 @@ nav {
     color: rgb(157, 116, 13);
     font-size: 1.5em;
     text-align: left;
-    transition: background-color 1.2s;
+    transition: background-color var(--transitionTime);
     z-index: 1;
 }
 
 nav.active {
-    background-color: #fdfdfdea;
+    background-color: #ffffff;
+    max-height: 100%;
 }
 
 nav div {
@@ -83,19 +85,55 @@ nav div {
 }
 
 nav div p {
-    margin: 2vh;
+    margin: 0px 0px 0px 10px;
     text-align: left;
     flex-grow: 1;
     letter-spacing: 15px;
 }
 
 nav div i {
-    padding-right: 2%;
+    display: block;
+    width: 25px;
+    height: 25px;
+    padding: 15px;
+    transform-origin: 49% 49%;
+    transition: transform var(--transitionTime);
+}
+
+nav div i.animate {
+    transform: rotate(450deg);
+    transform-origin: 49% 49%;
+}
+
+nav ul {
+    margin: 0;
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    height: 100vh;
+    /* background-color: #ffffff; */
+    display: none;
+}
+
+ul.display {
+    display: block;
+}
+
+nav.display {
+    background-color: #fffffff3;
+}
+
+nav ul li {
+    font-size: 100%;
+    margin-top: 0px;
+    opacity: 0;
+    transition: opacity 1s, margin .5s;
 }
 
 main {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-top: 100vh;
     flex-grow: 1;
     width: 100%;
@@ -109,15 +147,12 @@ main section header h1 {
 }
 
 section {
+    width: 80vw;
     text-align: center;
     height: min-content;
     border-bottom: 1px solid rgb(206, 206, 206);
     overflow: hidden;
 }
-
-/* section:first-child {
-    background-color: rgb(228, 164, 164);
-} */
 
 figure {
     margin: auto;
@@ -184,17 +219,23 @@ figcaption:hover::after {
 footer {
     background-color: rgb(42, 42, 52);
     color: rgb(169, 165, 165);
-
+    height: 400px;
 }
 
 @media (min-width: 600px) {
     main {
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    main section.intro {
+        flex-grow: 1;
+        width: 100%;
     }
 
     section {
-        width: 48vw;
+        width: 40vw;
     }
 }
