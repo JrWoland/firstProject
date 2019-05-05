@@ -6,12 +6,13 @@
     --colorAdobeEnd: #D5FFCF;
     --colorAdobeFont: rgb(10, 129, 142);
     --transitionTime: .5s;
+    --fontColor: #946d0a;
 
 }
 
 body {
     display: flex;
-    color: rgb(150, 111, 12);
+    color: var(--fontColor);
     flex-direction: column;
     margin: 0;
     padding: 0;
@@ -40,8 +41,8 @@ body {
 
 }
 
-header h1 {
-    font-size: 20px;
+header h2 {
+    font-size: 40px;
     padding: 0 30px;
     font-weight: 100;
 }
@@ -66,7 +67,7 @@ nav {
     font-family: 'Open Sans Condensed', sans-serif;
     position: fixed;
     width: 100%;
-    color: rgb(157, 116, 13);
+    color: var(--fontColor);
     font-size: 1.5em;
     text-align: left;
     transition: background-color var(--transitionTime);
@@ -75,7 +76,7 @@ nav {
 
 nav.active {
     background-color: #ffffff;
-    max-height: 100%;
+    max-height: 120vh;
 }
 
 nav div {
@@ -91,19 +92,31 @@ nav div p {
     letter-spacing: 15px;
 }
 
-nav div i {
-    display: block;
-    width: 25px;
-    height: 25px;
-    padding: 15px;
-    transform-origin: 49% 49%;
+nav div button {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    margin: 5px;
     transition: transform var(--transitionTime);
+    font-size: 1em;
+    line-height: 1em;
+    color: inherit;
+    outline: none;
 }
 
-nav div i.animate {
-    transform: rotate(450deg);
-    transform-origin: 49% 49%;
+
+nav div button:focus {
+    color: rgb(0, 0, 0);
+
 }
+
+nav div button.animate {
+    transform: rotate(450deg);
+}
+
+
 
 nav ul {
     margin: 0;
@@ -115,7 +128,7 @@ nav ul {
     display: none;
 }
 
-ul.display {
+nav ul.display {
     display: block;
 }
 
@@ -124,10 +137,38 @@ nav.display {
 }
 
 nav ul li {
-    font-size: 100%;
-    margin-top: 0px;
+    font-size: 1em;
+    margin: 0 auto 0;
+    width: fit-content;
     opacity: 0;
     transition: opacity 1s, margin .5s;
+    overflow: hidden;
+}
+
+nav ul li a {
+    position: relative;
+    text-decoration: inherit;
+    color: inherit;
+    user-select: none;
+
+}
+
+li a::after {
+    content: "";
+    margin: 0;
+    position: absolute;
+    left: -1px;
+    bottom: 0px;
+    width: 100%;
+    height: 1px;
+    transform: translateX(-100%);
+    background-color: var(--fontColor);
+    transition: .2s;
+}
+
+li a:hover::after {
+    transform: translateX(0%);
+
 }
 
 main {
@@ -141,11 +182,6 @@ main {
 
 }
 
-main section header h1 {
-    text-transform: uppercase;
-
-}
-
 section {
     width: 80vw;
     text-align: center;
@@ -154,23 +190,35 @@ section {
     overflow: hidden;
 }
 
+main section header p {
+    font-size: 35px;
+    margin: 15px 15px 15px;
+}
+
+main section header h2 {
+    text-transform: uppercase;
+    font-size: 20px;
+    padding: 0 30px;
+    font-weight: 100;
+
+}
+
 figure {
     margin: auto;
     width: 95%;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 10px;
 
 }
 
-figure div p {
+section div p {
     margin: 0;
     padding: 50px 0;
     line-height: 2em;
     text-align: justify;
-
 }
 
-figure div {
+section div {
     transition: .5s;
     height: 0;
 }
@@ -183,22 +231,32 @@ img {
 
 }
 
-figcaption {
+button.expand {
     position: relative;
     margin: auto;
+    background-color: transparent;
+    border: none;
+    color: var(--fontColor);
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
     max-width: 80px;
-    margin-bottom: 5px;
+    margin: 5px 0 5px 0;
     padding: 10px 10px;
     text-align: center;
     overflow: hidden;
     z-index: 0;
 }
 
-figcaption:hover {
+button.expand:hover {
     cursor: pointer;
 }
 
-figcaption::after {
+button.expand:focus {
+    color: black;
+}
+
+button.expand::after {
     content: "";
     margin: 0;
     position: absolute;
@@ -207,14 +265,15 @@ figcaption::after {
     width: 100%;
     height: 1px;
     transform: translateX(-100%);
-    background-color: darkgoldenrod;
+    background-color: var(--fontColor);
     transition: .2s;
 }
 
-figcaption:hover::after {
-    transform: translateX(0%);
 
+button.expand:hover::after {
+    transform: translateX(0%);
 }
+
 
 footer {
     background-color: rgb(42, 42, 52);
@@ -236,6 +295,39 @@ footer {
     }
 
     section {
-        width: 40vw;
+        width: 46vw;
+    }
+}
+
+@media (min-width: 1024px) {
+    nav {
+        display: flex;
+        justify-content: space-between;
+        height: 70px;
+    }
+
+    nav div button {
+        display: none;
+    }
+
+    nav div {
+        /* flex child */
+        flex-grow: 1;
+    }
+
+    nav ul {
+        display: flex;
+        width: 50%;
+        justify-content: space-around;
+        /* flex child */
+        flex-grow: 1;
+        align-items: center;
+        height: inherit;
+
+    }
+
+    nav ul li {
+        opacity: 1;
+        transition: opacity 1s, margin .5s;
     }
 }
